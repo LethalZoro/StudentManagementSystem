@@ -16,7 +16,7 @@ int main() {
 	file.open("data.csv");
 	vector<string> row;
 	string user, pass, name, fname;
-	int age, cnic, fsc_marks, net_marks;
+	int age=0, cnic=0, fsc_marks=0, net_marks=0;
 	string line, word, a_user, a_pass;
 	int linesRead = -1, temp = 0;
 	while (file >> line)
@@ -72,7 +72,6 @@ int main() {
 					switch (temp)
 					{
 					case 1:
-						cout << "hehe" << endl;
 						//students[linesRead - 1].set_username(word);
 						user = word;
 						break;
@@ -82,6 +81,7 @@ int main() {
 						break;
 					case 3:
 						//students[linesRead - 2].set_name(word); cout << "hehe" << endl;
+						cout << word<<endl;
 						name = word;
 						break;
 					case 4:
@@ -117,7 +117,7 @@ int main() {
 				}
 			}
 			/*Student =new Student(user, pass, name, fname, age, cnic, fsc_marks);*/
-			cout << linesRead;
+			//cout << linesRead;
 			students.push_back(Student(user, pass, name, fname, age, cnic, fsc_marks, net_marks));
 		}
 	}

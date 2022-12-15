@@ -180,6 +180,7 @@ label:
 			StudentReg(s);
 			Take_test(s);
 		case 3://3. for logout
+			
 			return;
 		default:
 
@@ -244,6 +245,8 @@ void StudentReg(vector<Student>& s) {
 	cin >> cnic;
 	cout << "Enter your fsc marks : ";
 	cin >> fsc_marks;
+	
+	
 
 	s[s.size() - 1].set_name(name);
 	s[s.size() - 1].set_fn(father_name);

@@ -125,6 +125,6 @@ int main() {
 	Admin   a(a_user, a_pass);
 	//Student s("abc", "xyz");
 	login(a, students);
-	//vector<MCQ> Exam;
+	vector<MCQ> Exam;
 	return 0;
 }

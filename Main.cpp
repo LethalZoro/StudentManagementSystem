@@ -126,6 +126,5 @@ int main() {
 	//Student s("abc", "xyz");
 	login(a, students);
 	vector<MCQ> Exam;
-	// test
 	return 0;
 }

@@ -2,6 +2,8 @@
 #include<iomanip>
 #include<vector>
 #include<algorithm>
+#include<fstream>
+#include<string>
 #include"Admission.h"
 #include"Student.h"
 #include"Admin.h"
@@ -204,7 +206,7 @@ void Generate_merit(vector<Student>& s) {
 		}
 	}
 	for (int i = 0; i < s.size(); i++) {
-		cout << s[i].get_name() << s[i].get_netmarks() << endl;
+		cout << s[i].get_firstname() <<" " << s[i].get_lastname() << s[i].get_netmarks() << endl;
 	}
 };
 void Take_test(vector<Student>& s) {
@@ -230,13 +232,15 @@ void Take_test(vector<Student>& s) {
 
 void StudentReg(vector<Student>& s) {
 	display(5);
-	string name;
+	string first_name,last_name;
 	string father_name;
 	int age;
 	long long int cnic;
 	int fsc_marks;
-	cout << "Enter students's name : ";
-	cin >> name;
+	cout << "Enter students's First name : ";
+	cin >> first_name;
+	cout << "Enter students's Last name : ";
+	cin >> last_name;
 	cout << "Enter your father's name : ";
 	cin >> father_name;
 	cout << "Enter your age : ";
@@ -248,7 +252,8 @@ void StudentReg(vector<Student>& s) {
 	
 	
 
-	s[s.size() - 1].set_name(name);
+	s[s.size() - 1].set_firstname(first_name);
+	s[s.size() - 1].set_lastname(last_name);
 	s[s.size() - 1].set_fn(father_name);
 	s[s.size() - 1].set_age(age);
 	s[s.size() - 1].set_cnic(cnic);
@@ -268,4 +273,113 @@ void NewStudent(vector<Student>& s) {
 	temp.set_password(pa);
 	s.push_back(temp);
 	return;
+}
+void File_Open(vector<Student>& s,Admin& admin) {
+	//here write the code for the file opening and reading
+	ifstream file;
+	file.open("data.csv");
+	vector<string> row;
+	string user, pass, first_name, last_name, fname;
+	int age = 0, cnic = 0, fsc_marks = 0, net_marks = 0;
+	string line, word, a_user, a_pass;
+	int linesRead = -1, temp = 0;
+	while (file >> line)
+	{
+		linesRead++;
+		if (linesRead == 0)
+		{
+			for (auto x : line)
+			{
+				if (x == ',' || x == '\n')
+				{
+					//cout << word << endl;
+					row.push_back(word);
+					switch (temp)
+					{
+					case 0:
+						a_user = word;
+						cout << a_user << endl;
+						break;
+					case 1:
+						a_pass = word;
+						cout << a_pass << endl;
+
+						break;
+					default:
+						break;
+					}temp++;
+					word = "";
+				}
+				else if (x != '\n')
+				{
+					word += x;
+				}
+			}
+
+			//continue;
+		}
+		else if (linesRead == 1) {
+			temp = 0;
+			continue;
+		}
+		else {
+			for (auto x : line)
+			{
+				if (x == ',' || x == '\n'||x ==' ')
+				{
+					if (temp == 9) {
+						temp = 0;
+					}
+					temp++;
+					//cout << word << endl;
+					row.push_back(word);
+					switch (temp)
+					{
+					case 1:
+						
+						user = word;
+						break;
+					case 2:
+						pass = word;
+						break;
+					case 3:
+						//cout << word << endl;
+						first_name = word;
+						break;
+					case 4:
+						last_name = word;
+					case 5:
+						fname = word;
+						break;
+					case 6:
+
+						age = stoi(word);
+						break;
+					case 7:
+						cnic = stoi(word);
+						break;
+					case 8:
+						fsc_marks = stoi(word);
+						break;
+					case 9:
+						net_marks = stoi(word);
+						break;
+					default:
+						break;
+					}
+
+					word = "";
+				}
+				else if (x != '\n')
+				{
+					word += x;
+				}
+			}
+			//cout << linesRead;
+			s.push_back(Student(user, pass, first_name,last_name, fname, age, cnic, fsc_marks, net_marks));
+		}
+	}
+	Admin   a(a_user, a_pass);
+	admin = a;
+	file.close();
 }

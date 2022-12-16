@@ -10,3 +10,4 @@ void NewStudent(vector<Student>& s);
 void StudentReg(vector<Student>& s);
 void Take_test(vector<Student>& s);
 void Generate_merit(vector<Student>& s);
+void File_Open(vector<Student>& s,Admin &admin);

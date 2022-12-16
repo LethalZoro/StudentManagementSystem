@@ -2,7 +2,8 @@
 using namespace std;
 #include"Student.h"
 Student::Student() {
-	name = " ";
+	first_name = " ";
+	last_name = " ";
 	father_name = " ";
 	age = 0;
 	cnic = 0;
@@ -10,21 +11,20 @@ Student::Student() {
 	roll_num++;
 }
 
-Student::Student(string us, string p, string n, string fn, int ag, int cnic, int fsc,int net) :Admission(us, p) {
+Student::Student(string us, string p, string first_n,string last_n, string father_n, int ag, int cnic, int fsc,int net) :Admission(us, p) {
 	roll_num++;
-	name = n;
-	father_name = fn;
+	first_name = first_n;
+	last_name = last_n;
+	father_name = father_n;
 	age = ag;
 	this->cnic = cnic;
 	fsc_marks = fsc;
 	net_marks = net;
 }
 int Student::Student::roll_num = 0;
+
 int Student::get_age() {
 	return age;
-}
-string Student::get_name() {
-	return name;
 }
 string Student::get_fname() {
 	return father_name;
@@ -37,11 +37,14 @@ int Student::Student::get_fscm() {
 int Student::get_netmarks() {
 	return net_marks;
 }
+string Student::get_firstname() {
+	return first_name;
+}
+string Student::get_lastname() {
+	return last_name;
+}
 void Student::set_age(int age) {
 	this->age = age;
-};
-void Student::set_name(string n) {
-	name = n;
 };
 void Student::set_fn(string fn) {
 	father_name = fn;
@@ -55,4 +58,11 @@ void Student::set_fscm(int fm) {
 void Student::set_netmarks(int nm) {
 	net_marks = nm;
 };
+void Student::set_firstname(string fn) {
+	first_name = fn;
+};
+void Student::set_lastname(string ln) {
+	last_name = ln;
+};
+
 

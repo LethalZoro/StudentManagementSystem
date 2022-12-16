@@ -274,7 +274,7 @@ void NewStudent(vector<Student>& s) {
 	s.push_back(temp);
 	return;
 }
-void File_Open(vector<Student>& s,Admin& admin) {
+void Input_File(vector<Student>& s,Admin& admin) {
 	//here write the code for the file opening and reading
 	ifstream file;
 	file.open("data.csv");
@@ -352,11 +352,10 @@ void File_Open(vector<Student>& s,Admin& admin) {
 						fname = word;
 						break;
 					case 6:
-
 						age = stoi(word);
 						break;
 					case 7:
-						cnic = stoi(word);
+						cnic = atoll(word.c_str());
 						break;
 					case 8:
 						fsc_marks = stoi(word);
@@ -381,5 +380,16 @@ void File_Open(vector<Student>& s,Admin& admin) {
 	}
 	Admin   a(a_user, a_pass);
 	admin = a;
+	file.close();
+}
+void Output_File(vector<Student>& s, Admin& admin) {
+	//here write the code for the file opening and writing
+	ofstream file;
+	file.open("data.csv");
+	file << admin.get_username() << "," << admin.get_password() <<"," << endl;
+	file << "Username,Password,First_Name,Last_Name,Father_Name,Age,CNIC,FSC_Marks,NET_Marks"<<"," << endl;
+	for (int i = 0; i < s.size(); i++) {
+		file << s[i].get_username() << "," << s[i].get_password() << "," << s[i].get_firstname() << "," << s[i].get_lastname() << "," << s[i].get_fname() << "," << s[i].get_age() << "," << s[i].get_cnic() << "," << s[i].get_fscm() << "," << s[i].get_netmarks() <<"," << endl;
+	}
 	file.close();
 }

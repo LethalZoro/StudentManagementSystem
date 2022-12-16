@@ -13,9 +13,11 @@ using namespace std;
 int main() {
 	vector<Student> students;
 	Admin   admin;
-	File_Open(students,admin);
+	Input_File(students,admin);
 	//Student s("abc", "xyz");
 	login(admin, students);
-	vector<MCQ> Exam;
+	
+	//this should be the last line of the main function
+	Output_File(students, admin);
 	return 0;
 }

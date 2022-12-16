@@ -1,5 +1,6 @@
 figgy,12345,
-user,pass,first_name,Last_name,fname,age,cinic,fsc_marks,net_marks,
+Username,Password,First_Name,Last_Name,Father_Name,Age,CNIC,FSC_Marks,NET_Marks,
 shah,123,Rana,shahzaib,ac,19,36302,1067,67,
 ahmad,123,Raja,shahzaib2,ac,19,36302,1067,78,
 wafa,456,wajiha,Fatima,sajid,19,36501,1000,145,
+a,z,muhammad,mustafa,s,19,3630251644685,1089,0,

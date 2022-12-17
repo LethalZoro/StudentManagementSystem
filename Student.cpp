@@ -6,12 +6,12 @@ Student::Student() {
 	last_name = " ";
 	father_name = " ";
 	age = 0;
-	cnic = 0;
+	cnic = "";
 	fsc_marks = 0;
 	roll_num++;
 }
 
-Student::Student(string us, string p, string first_n,string last_n, string father_n, int ag,long long int cic, int fsc,int net) :Admission(us, p) {
+Student::Student(string us, string p, string first_n,string last_n, string father_n, int ag,string cic, int fsc,int net) :Admission(us, p) {
 	roll_num++;
 	first_name = first_n;
 	last_name = last_n;
@@ -28,7 +28,7 @@ int Student::get_age() {
 }
 string Student::get_fname() {
 	return father_name;
-}long long int Student::get_cnic() {
+}string Student::get_cnic() {
 	return cnic;
 }
 int Student::Student::get_fscm() {
@@ -49,7 +49,7 @@ void Student::set_age(int age) {
 void Student::set_fname(string fn) {
 	father_name = fn;
 };
-void Student::set_cnic(long long int c) {
+void Student::set_cnic(string c) {
 	cnic = c;
 };
 void Student::set_fscm(int fm) {

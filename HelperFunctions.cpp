@@ -264,7 +264,7 @@ void Show_Student(vector<Student>& s) {
 }
 void Edit_Studentinfo(vector<Student>& s) {
 	Show_Student(s);
-	long long int id;
+	string id;
 	bool cnic_found = false;
 	int op_edit=0,age,fscmarks;
 	string new_fname, new_lname,fathername;
@@ -411,7 +411,7 @@ void StudentReg(vector<Student>& s) {
 	string first_name,last_name;
 	string father_name;
 	int age;
-	long long int cnic;
+	string cnic;
 	int fsc_marks;
 	cout << "Enter students's First name : ";
 	cin >> first_name;
@@ -455,7 +455,7 @@ void Input_File(vector<Student>& s,Admin& admin) {
 	vector<string> row;
 	string user, pass, first_name, last_name, fname;
 	int age = 0,fsc_marks = 0, net_marks = 0;
-	long long int cnic = 0;
+	string cnic;
 	string line, word, a_user, a_pass;
 	int linesRead = -1, temp = 0;
 	while (file >> line)
@@ -530,7 +530,7 @@ void Input_File(vector<Student>& s,Admin& admin) {
 						age = stoi(word);
 						break;
 					case 7:
-						cnic = stoll(word);
+						cnic = word;
 						break;
 					case 8:
 						fsc_marks = stoi(word);
@@ -574,13 +574,13 @@ void Add_MCQ(vector<MCQ>& m) {
 	cin.ignore();
 	cout << "Enter the question" << endl;
 	getline(cin, q);
-	cout << "Enter the options 1" << endl;
+	cout << "Enter the options a" << endl;
 	getline(cin, option[0]);
-	cout << "Enter the options 2" << endl;
+	cout << "Enter the options b" << endl;
 	getline(cin, option[1]);
-	cout << "Enter the options 3" << endl;
+	cout << "Enter the options c" << endl;
 	getline(cin, option[2]);
-	cout << "Enter the options 4" << endl;
+	cout << "Enter the options d" << endl;
 	getline(cin, option[3]);
 	cout << "Enter the correct option" << endl;
 	cin >> correct_option;

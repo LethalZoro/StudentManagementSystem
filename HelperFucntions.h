@@ -8,7 +8,7 @@ void display(int x);
 void login(Admin a, vector<Student>& s, vector<MCQ>& mcq);
 void NewStudent(vector<Student>& s);
 void StudentReg(vector<Student>& s);
-void Take_test(vector<Student>& s);
+int Take_test(vector<Student>& s,vector<MCQ>&mcq );
 void Generate_merit(vector<Student>& s);
 void Input_File(vector<Student>& s,Admin &admin);
 void Output_File(vector<Student>& s, Admin& admin);

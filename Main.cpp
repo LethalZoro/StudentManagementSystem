@@ -14,10 +14,12 @@ int main() {
 	vector<Student> students;
 	Admin   admin;
 	vector<MCQ> mcq;
-	
+	//first run this
 	Input_File(students,admin);
-	login(admin, students,mcq);
 	Read_MCQ(mcq);
+	//first run above
+	
+	login(admin, students,mcq);
 	
 	
 	//this should be the last line of the main function

@@ -10,6 +10,7 @@
 #include"Admin.h"
 #include"HelperFucntions.h"
 #include"MCQ.h"
+#define Questions_toGive 5
 using namespace std;
 
 //Display function
@@ -189,6 +190,14 @@ label:
 					cout << "Correct ##";
 					system("pause");
 					is_correct = true;
+					//take test for student
+					if (s[i].get_netmarks()!=0)
+					{
+						s[i].set_netmarks(Take_test(s, mcq));
+					}
+					else {
+						StudentReg(s);
+					}
 					break;
 				}
 
@@ -199,13 +208,12 @@ label:
 				system("cls");
 				goto label;
 			}
-			//take test for student
-			Take_test(s);
+			
 			break;
 		case 2:
 			NewStudent(s);
 			StudentReg(s);
-			Take_test(s);
+			s[s.size() - 1].set_netmarks(Take_test(s, mcq));
 		case 3://3. for logout
 			
 			return;
@@ -291,23 +299,59 @@ void Generate_merit(vector<Student>& s) {
 	cout << "Merit list generated successfully\n";
 	system("pause");
 };
-void Take_test(vector<Student>& s) {
+int Take_test(vector<Student>& s,vector<MCQ>& mcq) {
 	//here write the code for the student menu and every thing related to it
 	int op_student;
+	int* Q_done = new int[mcq.size()];
+	int count = 0;
 	display(7);
 	cin >> op_student;
+	system("cls");
 	switch (op_student)
 	{
 	case 1:
 		//Place for Test function
-		cout << "test starts";
+		//cout << "test starts";
+		//generate random number between 1 to 10
+		for (int i = 0; i < Questions_toGive;i++) {
+			
+			
+				srand(time(NULL));
+				int random = rand() % mcq.size() + 1;
+				//check if the random number is already generated or not
+				for (int j = 0; j < mcq.size(); j++) {
+					if (Q_done[j] == random) {
+						random = rand() % mcq.size() + 1;
+						j = 0;
+					}
+				}
+				Q_done[i] = random;
+				
+				cout <<setw(15)<< mcq[random].get_questions() << endl;
+				cout << "a. " << setw(15) << left << mcq[random].get_options()[0] << right << "b. " << setw(15) << left << mcq[random].get_options()[1] << right << endl;
+				//cout <<"c. "<<setw(15) <<left << mcq[random].get_options()[2]<<right<< "d. " <<setw(15) <<left<< mcq[random].get_options()[3]<<right << endl;
+				cout << "c. " << setw(15) << left << mcq[random].get_options()[2] << right << "d. " << setw(15) << left << mcq[random].get_options()[3] << right << endl;
+				cout << setw(15)<<"Enter the correct option: ";
+				char op;
+				cin >> op;
+				if (mcq[random].get_answers() == op) {
+					cout << "Correct answer\n";
+					count++;
+				}
+				else {
+					cout << "Wrong answer\n";
+				}
+				system("pause");
+				system("cls");
+		}
 		break;
 	case 2:
-		return;
+		return 0;
 		break;
 	default:
 		break;
 	}
+	return count;
 }
 
 
@@ -482,21 +526,27 @@ void Add_MCQ(vector<MCQ>& m) {
 	cout << "Enter the question" << endl;
 	getline(cin, q);
 	system("pause");
+	system("cls");
 	cout << "Enter the options 1" << endl;
 	getline(cin, option[0]);
 	system("pause");
+	system("cls");
 	cout << "Enter the options 2" << endl;
 	getline(cin, option[1]);
 	system("pause");
+	system("cls");
 	cout << "Enter the options 3" << endl;
 	getline(cin, option[2]);
 	system("pause");
+	system("cls");
 	cout << "Enter the options 4" << endl;
 	getline(cin, option[3]);
 	system("pause");
+	system("cls");
 	cout << "Enter the correct option" << endl;
 	cin >> correct_option;
 	system("pause");
+	system("cls");
 	m.push_back(MCQ(q, option, correct_option));
 }
 void Read_MCQ(vector<MCQ>& m) {

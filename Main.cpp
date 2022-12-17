@@ -21,7 +21,6 @@ int main() {
 	
 	login(admin, students,mcq);
 	
-	
 	//this should be the last line of the main function
 	Output_File(students, admin);
 	Save_MCQ(mcq);

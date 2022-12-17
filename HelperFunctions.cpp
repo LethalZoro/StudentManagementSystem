@@ -10,7 +10,7 @@
 #include"Admin.h"
 #include"HelperFucntions.h"
 #include"MCQ.h"
-#define Questions_toGive 3
+#define Questions_toGive 10
 using namespace std;
 
 //Display function
@@ -376,7 +376,6 @@ int Take_test(vector<Student>& s,vector<MCQ>& mcq) {
 					}
 				}
 				Q_done[i] = random;
-				
 				cout <<setw(15)<< mcq[random].get_questions() << endl;
 				cout << "a. " << setw(15) << left << mcq[random].get_options()[0] << right << "b. " << setw(15) << left << mcq[random].get_options()[1] << right << endl;
 				//cout <<"c. "<<setw(15) <<left << mcq[random].get_options()[2]<<right<< "d. " <<setw(15) <<left<< mcq[random].get_options()[3]<<right << endl;

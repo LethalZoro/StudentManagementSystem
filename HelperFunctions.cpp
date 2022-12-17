@@ -71,9 +71,10 @@ void display(int x) {
 		cout << "###################################\n";
 		cout << "|" << setw(35) << "|\n";
 		cout << "|" << setw(8) << "1." << setw(25) << left << "Generate merit list" << right << "|\n";
-		cout << "|" << setw(8) << "2." << setw(25) << left << "Edit Student info" << right << "|\n";
-		cout << "|" << setw(8) << "3." << setw(25) << left << "Add or Edit MCQs" << right << "|\n";
-		cout << "|" << setw(8) << "4." << setw(25) << left << "Logout" << right << "|\n";
+		cout << "|" << setw(8) << "2." << setw(25) << left << "Show All Students" << right << "|\n";
+		cout << "|" << setw(8) << "3." << setw(25) << left << "Edit Student info" << right << "|\n";
+		cout << "|" << setw(8) << "4." << setw(25) << left << "Add MCQs" << right << "|\n";
+		cout << "|" << setw(8) << "5." << setw(25) << left << "Logout" << right << "|\n";
 		cout << "|" << setw(35) << "|\n";
 		cout << "###################################\n";
 		break;
@@ -100,21 +101,7 @@ void display(int x) {
 		cout << "|" << setw(30) << "|\n";
 		cout << "##############################\n";
 		break;
-	case 9://edit MCQs
-		system("cls");
-		cout << "##############################\n";
-		cout << "|" << setw(30) << "|\n";
-		cout << "|" << setw(10) << "1." << setw(18) << left << "Add MCQ" << right << "|\n";
-		cout << "|" << setw(30) << "|\n";
-		cout << "|" << setw(10) << "2." << setw(18) << left << "Edit MCQ" << right << "|\n";
-		cout << "|" << setw(30) << "|\n";
-		cout << "|" << setw(10) << "3." << setw(18) << left << "Delete MCQ" << right << "|\n";
-		cout << "|" << setw(30) << "|\n";
-		cout << "|" << setw(10) << "4." << setw(18) << left << "Back" << right << "|\n";
-		cout << "|" << setw(30) << "|\n";
-		cout << "##############################\n";
-		break;
-	case 10:
+	case 9:
 		system("cls");
 		cout << "##############################\n";
 		cout << "|" << setw(30) << "|\n";
@@ -149,28 +136,44 @@ label:
 		cin >> p;
 		if (a.get_username().compare(us) == 0 && a.get_password().compare(p) == 0) {
 			//code about every thing related to admin
-			while (op_admin != 4) {
+			while (op_admin != 5) {
 				display(6);
 				cin >> op_admin;
 				switch (op_admin)
 				{
 				case 1://Generate merit list
 					Generate_merit(s);
+					system("cls");
+					cout << "Merit list generated successfully\n";
+					int a;
+					cout << "To display merit list press 1: "<<endl;
+					cout << "To go back press 2: "<<endl;
+					cin >> a;
+					if (a == 1)
+					{
+						for (int i = 0; i < s.size(); i++) {
+							cout << s[i].get_firstname() << " " << s[i].get_lastname() << " " << s[i].get_netmarks() << endl;
+						}
+						system("pause");
+					}
 					break;
 				case 2:
-					Edit_Studentinfo(s);
+					Show_Student(s);
+					system("pause");
 					break;
 				case 3:
-					Add_MCQ(mcq);
+					Edit_Studentinfo(s);
 					break;
 				case 4:
+					Add_MCQ(mcq);
+					break;
+				case 5:
 					return;//logout
 					break;
 				default:
 					break;
 				}
 			}
-
 		}
 		else {
 			cout << "Incorrect username and password:\n";
@@ -205,7 +208,7 @@ label:
 						s[i].set_netmarks(Take_test(s, mcq));
 					}
 					start:
-					display(10);
+					display(9);
 					cin >> op_student;
 					switch (op_student)
 					{
@@ -252,14 +255,25 @@ label:
 		}
 	}
 }
+void Show_Student(vector<Student>& s) {
+	system("cls");
+	cout << setw(15) <<left<< "First Name"<<right << setw(15) <<left<< "Last Name"<<right << setw(20)<<left << "Cnic"<<right<<endl;
+	for (int i = 0; i < s.size(); i++) {
+	cout << setw(15) <<left<< s[i].get_firstname() <<right << setw(15) <<left<< s[i].get_lastname() <<right << setw(20)<<left << s[i].get_cnic() <<right<<endl;
+	}
+}
 void Edit_Studentinfo(vector<Student>& s) {
+	Show_Student(s);
 	long long int id;
+	bool cnic_found = false;
 	int op_edit=0,age,fscmarks;
 	string new_fname, new_lname,fathername;
 	cout << "Enter the Cnic of the student you want to edit: ";
+	label:
 	cin >> id;
 	for (int i = 0; i < s.size(); i++) {
 		if (s[i].get_cnic() == id) {
+			cnic_found = true;
 			while(op_edit!=6)
 			{
 				display(8);
@@ -281,7 +295,8 @@ void Edit_Studentinfo(vector<Student>& s) {
 				case 3:
 					cout << "The old father's name is:   " << s[i].get_fname() << endl;
 					cout << "Enter the new Father's name: ";
-					cin >> fathername;
+					cin.ignore();
+					getline(cin, fathername);
 					s[i].set_fname(fathername);
 					break;
 				case 4:
@@ -304,6 +319,12 @@ void Edit_Studentinfo(vector<Student>& s) {
 				}
 			}
 		}
+		
+	}
+	if (!cnic_found) {
+		cout << "Cninc not found in the database!" << endl;
+	    cout<<"Please enter a different Cnic : " << endl;
+		goto label;
 	}
 	
 }
@@ -325,8 +346,8 @@ void Generate_merit(vector<Student>& s) {
 	/*for (int i = 0; i < s.size(); i++) {
 		cout << s[i].get_firstname() <<" " << s[i].get_lastname() << s[i].get_netmarks() << endl;
 	}*/
-	//cout << "Merit list generated successfully\n";
-	//system("pause");
+	
+	
 };
 int Take_test(vector<Student>& s,vector<MCQ>& mcq) {
 	//here write the code for the student menu and every thing related to it
@@ -404,9 +425,6 @@ void StudentReg(vector<Student>& s) {
 	cin >> cnic;
 	cout << "Enter your fsc marks : ";
 	cin >> fsc_marks;
-	
-	
-
 	s[s.size() - 1].set_firstname(first_name);
 	s[s.size() - 1].set_lastname(last_name);
 	s[s.size() - 1].set_fname(father_name);
@@ -553,30 +571,19 @@ void Output_File(vector<Student>& s, Admin& admin) {
 void Add_MCQ(vector<MCQ>& m) {
 	string q, option[4];
 	char correct_option;
+	cin.ignore();
 	cout << "Enter the question" << endl;
 	getline(cin, q);
-	system("pause");
-	system("cls");
 	cout << "Enter the options 1" << endl;
 	getline(cin, option[0]);
-	system("pause");
-	system("cls");
 	cout << "Enter the options 2" << endl;
 	getline(cin, option[1]);
-	system("pause");
-	system("cls");
 	cout << "Enter the options 3" << endl;
 	getline(cin, option[2]);
-	system("pause");
-	system("cls");
 	cout << "Enter the options 4" << endl;
 	getline(cin, option[3]);
-	system("pause");
-	system("cls");
 	cout << "Enter the correct option" << endl;
 	cin >> correct_option;
-	system("pause");
-	system("cls");
 	m.push_back(MCQ(q, option, correct_option));
 }
 void Read_MCQ(vector<MCQ>& m) {

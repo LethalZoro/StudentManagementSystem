@@ -16,3 +16,4 @@ void Edit_Studentinfo(vector<Student>& s);
 void Add_MCQ(vector<MCQ>& m);
 void Read_MCQ(vector<MCQ>& m);
 void Save_MCQ(vector<MCQ>& mcq);
+void Show_Student(vector<Student>& s);

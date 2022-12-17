@@ -257,9 +257,9 @@ label:
 }
 void Show_Student(vector<Student>& s) {
 	system("cls");
-	cout << setw(15) <<left<< "First Name"<<right << setw(15) <<left<< "Last Name"<<right << setw(20)<<left << "Cnic"<<right<<endl;
+	cout << setw(15) <<left<< "First Name"<<right << setw(15) <<left<< "Last Name"<<right << setw(15) << left << "Father's Name" << right << setw(15) << left << "Age" << right <<  setw(20)<<left << "CNIC"<<right<<endl;
 	for (int i = 0; i < s.size(); i++) {
-	cout << setw(15) <<left<< s[i].get_firstname() <<right << setw(15) <<left<< s[i].get_lastname() <<right << setw(20)<<left << s[i].get_cnic() <<right<<endl;
+	cout << setw(15) <<left<< s[i].get_firstname() <<right << setw(15) <<left<< s[i].get_lastname() <<right << setw(15) << left << s[i].get_fname() << right << setw(15) << left << s[i].get_age() << right << setw(20)<<left << s[i].get_cnic() <<right<<endl;
 	}
 }
 void Edit_Studentinfo(vector<Student>& s) {

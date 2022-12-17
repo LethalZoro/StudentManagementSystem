@@ -4,6 +4,7 @@
 #include<algorithm>
 #include<fstream>
 #include<string>
+#include <stdlib.h>
 #include"Admission.h"
 #include"Student.h"
 #include"Admin.h"
@@ -84,6 +85,34 @@ void display(int x) {
 		cout << "|" << setw(30) << "|\n";
 		cout << "##############################\n";
 		break;
+	case 8://edit Students info
+		system("cls");
+		cout << "##############################\n";
+		cout << "|" << setw(30) << "|\n";
+		cout << "|" << setw(8) << "1." << setw(20) << left << "Edit First Name" << right << "|\n";
+		cout << "|" << setw(8) << "2." << setw(20) << left << "Edit Last Name" << right << "|\n";
+		cout << "|" << setw(8) << "3." << setw(20) << left << "Edit Father's Name" << right << "|\n";
+		cout << "|" << setw(8) << "4." << setw(20) << left << "Edit Age" << right << "|\n";
+		cout << "|" << setw(8) << "5." << setw(20) << left << "Edit Fsc Marks" << right << "|\n";
+		cout << "|" << setw(8) << "6." << setw(20) << left << "Return to main Menu" << right << "|\n";
+		cout << "|" << setw(30) << "|\n";
+		cout << "##############################\n";
+		break;
+	case 9://edit MCQs
+		system("cls");
+		cout << "##############################\n";
+		cout << "|" << setw(30) << "|\n";
+		cout << "|" << setw(10) << "1." << setw(18) << left << "Add MCQ" << right << "|\n";
+		cout << "|" << setw(30) << "|\n";
+		cout << "|" << setw(10) << "2." << setw(18) << left << "Edit MCQ" << right << "|\n";
+		cout << "|" << setw(30) << "|\n";
+		cout << "|" << setw(10) << "3." << setw(18) << left << "Delete MCQ" << right << "|\n";
+		cout << "|" << setw(30) << "|\n";
+		cout << "|" << setw(10) << "4." << setw(18) << left << "Back" << right << "|\n";
+		cout << "|" << setw(30) << "|\n";
+		cout << "##############################\n";
+		break;
+		
 	default:
 		break;
 	}
@@ -92,7 +121,7 @@ void display(int x) {
 //To login the login module per say &to direct the control to the desired position
 void login(Admin a, vector<Student>& s) {
 label:
-	int op_start, op_student, op_admin;
+	int op_start, op_student, op_admin=0;
 	int* net_score = new int;
 	bool is_correct = false;
 	string us, p;
@@ -109,31 +138,26 @@ label:
 		cin >> p;
 		if (a.get_username().compare(us) == 0 && a.get_password().compare(p) == 0) {
 			//code about every thing related to admin
-			//cout << "Correct ##";
-			display(6);
-			cin >> op_admin;
-			switch (op_admin)
-			{
-			case 1:
-				//generate merit list
-				/*for (int i = 0; i < s.size(); i++) {
-					net_score[i] = s[i].get_netmarks();
+			while (op_admin != 4) {
+				display(6);
+				cin >> op_admin;
+				switch (op_admin)
+				{
+				case 1://Generate merit list
+					Generate_merit(s);
+					break;
+				case 2:
+					Edit_Studentinfo(s);
+					break;
+				case 3:
+
+					break;
+				case 4:
+					return;//logout
+					break;
+				default:
+					break;
 				}
-				sort(net_score, net_score + s.size(), greater<int>());
-				a.set_merit(net_score);*/
-				Generate_merit(s);
-				break;
-			case 2:
-
-				break;
-			case 3:
-
-				break;
-			case 4:
-				return;//logout
-				break;
-			default:
-				break;
 			}
 
 		}
@@ -190,6 +214,61 @@ label:
 		}
 	}
 }
+void Edit_Studentinfo(vector<Student>& s) {
+	long long int id;
+	int op_edit=0,age,fscmarks;
+	string new_fname, new_lname,fathername;
+	cout << "Enter the Cnic of the student you want to edit: ";
+	cin >> id;
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i].get_cnic() == id) {
+			while(op_edit!=6)
+			{
+				display(8);
+				cin >> op_edit;
+				switch (op_edit)
+				{
+				case 1:
+					cout << "The old first name is: " << s[i].get_firstname() << endl;
+					cout << "Enter the new First name: ";
+					cin >> new_fname;
+					s[i].set_firstname(new_fname);
+					break;
+				case 2:
+					cout << "The old last name is:   " << s[i].get_lastname() << endl;
+					cout << "Enter the new Last name: ";
+					cin >> new_lname;
+					s[i].set_lastname(new_lname);
+					break;
+				case 3:
+					cout << "The old father's name is:   " << s[i].get_fname() << endl;
+					cout << "Enter the new Father's name: ";
+					cin >> fathername;
+					s[i].set_fname(fathername);
+					break;
+				case 4:
+					cout << "The old age is:   " << s[i].get_age() << endl;
+					cout << "Enter the new Age: ";
+					cin >> age;
+					s[i].set_age(age);
+					break;
+				case 5:
+					cout << "The old Fsc marks are:   " << s[i].get_fscm() << endl;
+					cout << "Enter the new Fsc marks: ";
+					cin >> fscmarks;
+					s[i].set_fscm(fscmarks);
+					break;
+				case 6:
+					return;
+					break;
+				default:
+					break;
+				}
+			}
+		}
+	}
+	
+}
 void Generate_merit(vector<Student>& s) {
 	Student temp;
 
@@ -205,9 +284,10 @@ void Generate_merit(vector<Student>& s) {
 			}
 		}
 	}
-	for (int i = 0; i < s.size(); i++) {
+	/*for (int i = 0; i < s.size(); i++) {
 		cout << s[i].get_firstname() <<" " << s[i].get_lastname() << s[i].get_netmarks() << endl;
-	}
+	}*/
+	cout << "Merit list generated successfully\n";
 };
 void Take_test(vector<Student>& s) {
 	//here write the code for the student menu and every thing related to it
@@ -254,7 +334,7 @@ void StudentReg(vector<Student>& s) {
 
 	s[s.size() - 1].set_firstname(first_name);
 	s[s.size() - 1].set_lastname(last_name);
-	s[s.size() - 1].set_fn(father_name);
+	s[s.size() - 1].set_fname(father_name);
 	s[s.size() - 1].set_age(age);
 	s[s.size() - 1].set_cnic(cnic);
 	s[s.size() - 1].set_fscm(fsc_marks);
@@ -280,7 +360,8 @@ void Input_File(vector<Student>& s,Admin& admin) {
 	file.open("data.csv");
 	vector<string> row;
 	string user, pass, first_name, last_name, fname;
-	int age = 0, cnic = 0, fsc_marks = 0, net_marks = 0;
+	int age = 0,fsc_marks = 0, net_marks = 0;
+	long long int cnic = 0;
 	string line, word, a_user, a_pass;
 	int linesRead = -1, temp = 0;
 	while (file >> line)
@@ -355,7 +436,7 @@ void Input_File(vector<Student>& s,Admin& admin) {
 						age = stoi(word);
 						break;
 					case 7:
-						cnic = atoll(word.c_str());
+						cnic = stoll(word);
 						break;
 					case 8:
 						fsc_marks = stoi(word);

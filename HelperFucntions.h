@@ -12,3 +12,4 @@ void Take_test(vector<Student>& s);
 void Generate_merit(vector<Student>& s);
 void Input_File(vector<Student>& s,Admin &admin);
 void Output_File(vector<Student>& s, Admin& admin);
+void Edit_Studentinfo(vector<Student>& s);

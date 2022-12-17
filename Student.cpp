@@ -11,13 +11,13 @@ Student::Student() {
 	roll_num++;
 }
 
-Student::Student(string us, string p, string first_n,string last_n, string father_n, int ag, int cnic, int fsc,int net) :Admission(us, p) {
+Student::Student(string us, string p, string first_n,string last_n, string father_n, int ag,long long int cic, int fsc,int net) :Admission(us, p) {
 	roll_num++;
 	first_name = first_n;
 	last_name = last_n;
 	father_name = father_n;
 	age = ag;
-	this->cnic = cnic;
+	cnic = cic;
 	fsc_marks = fsc;
 	net_marks = net;
 }
@@ -46,7 +46,7 @@ string Student::get_lastname() {
 void Student::set_age(int age) {
 	this->age = age;
 };
-void Student::set_fn(string fn) {
+void Student::set_fname(string fn) {
 	father_name = fn;
 };
 void Student::set_cnic(long long int c) {

@@ -10,7 +10,7 @@
 #include"Admin.h"
 #include"HelperFucntions.h"
 #include"MCQ.h"
-#define Questions_toGive 5
+#define Questions_toGive 3
 using namespace std;
 
 //Display function
@@ -114,7 +114,16 @@ void display(int x) {
 		cout << "|" << setw(30) << "|\n";
 		cout << "##############################\n";
 		break;
-		
+	case 10:
+		system("cls");
+		cout << "##############################\n";
+		cout << "|" << setw(30) << "|\n";
+		cout << "|" << setw(10) << "1." << setw(18) << left << "Show Result" << right << "|\n";
+		cout << "|" << setw(30) << "|\n";
+		cout << "|" << setw(10) << "2." << setw(18) << left << "Logout" << right << "|\n";
+		cout << "|" << setw(30) << "|\n";
+		cout << "##############################\n";
+		break;
 	default:
 		break;
 	}
@@ -191,12 +200,32 @@ label:
 					system("pause");
 					is_correct = true;
 					//take test for student
-					if (s[i].get_netmarks()!=0)
+					if (s[i].get_netmarks()==0)
 					{
 						s[i].set_netmarks(Take_test(s, mcq));
 					}
-					else {
-						StudentReg(s);
+					start:
+					display(10);
+					cin >> op_student;
+					switch (op_student)
+					{
+					case 1:
+						//show result
+						cout << "Your net score is: " << s[i].get_netmarks() << endl;
+						Generate_merit(s);
+						for (int i = 0; i < s.size(); i++)
+						{
+							if (s[i].get_username().compare(us) == 0 && s[i].get_password().compare(p) == 0)
+							{
+								cout << "Your Merit Position is: " << i+1 << endl;
+							}
+						}
+						system("pause");
+						goto start;
+						break;
+					case 2:
+						return;//logout
+						break;
 					}
 					break;
 				}
@@ -296,8 +325,8 @@ void Generate_merit(vector<Student>& s) {
 	/*for (int i = 0; i < s.size(); i++) {
 		cout << s[i].get_firstname() <<" " << s[i].get_lastname() << s[i].get_netmarks() << endl;
 	}*/
-	cout << "Merit list generated successfully\n";
-	system("pause");
+	//cout << "Merit list generated successfully\n";
+	//system("pause");
 };
 int Take_test(vector<Student>& s,vector<MCQ>& mcq) {
 	//here write the code for the student menu and every thing related to it
@@ -400,6 +429,7 @@ void NewStudent(vector<Student>& s) {
 	s.push_back(temp);
 	return;
 }
+
 void Input_File(vector<Student>& s,Admin& admin) {
 	//here write the code for the file opening and reading
 	ifstream file;

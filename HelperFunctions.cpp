@@ -653,7 +653,7 @@ void Read_MCQ(vector<MCQ>& m) {
 void Save_MCQ(vector<MCQ>& mcq) {
 	ofstream file;
 	file.open("QuestionBank.csv");
-	file << "Question,Option1,Option2,Option3,Option4,Correct_Option" << endl;
+	file << "Question,Option1,Option2,Option3,Option4,Correct_Option"<<"," << endl;
 	for (int i = 0; i < mcq.size(); i++) {
 		file << mcq[i].get_questions() << "," << mcq[i].get_options()[0] << "," << mcq[i].get_options()[1] << "," << mcq[i].get_options()[2] << "," << mcq[i].get_options()[3] << "," << mcq[i].get_answers()<<"," << endl;
 	}

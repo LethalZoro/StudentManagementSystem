@@ -14,3 +14,4 @@ void Input_File(vector<Student>& s,Admin &admin);
 void Output_File(vector<Student>& s, Admin& admin);
 void Edit_Studentinfo(vector<Student>& s);
 void Add_MCQ(vector<MCQ>& m);
+void Read_MCQ(vector<MCQ>& m);

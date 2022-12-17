@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Data.csv" />
+    <None Include="QuestionBank.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

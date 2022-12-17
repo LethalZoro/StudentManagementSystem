@@ -490,6 +490,69 @@ void Add_MCQ(vector<MCQ>& m) {
 	getline(cin, option[3]);
 	cout << "Enter the correct option" << endl;
 	cin >> correct_option;
-	
 	m.push_back(MCQ(question, option, correct_option));
+}
+void Read_MCQ(vector<MCQ>& m) {
+	//here write the code for the file opening and reading
+	ifstream file;
+	file.open("QuestionBank.csv");
+	vector<string> row;
+	string question, option[4];
+	char correct_option=' ';
+	string line, word;
+	int linesRead = -1, temp = 0;
+	while (getline(file,line))
+	{
+		linesRead++;
+		if (linesRead == 0)
+		{
+			continue;
+		}
+		else {
+			for (auto x : line)
+			{
+				if (x == ',' || x == '\n')
+				{
+					if (temp == 6) {
+						temp = 0;
+					}
+					temp++;
+					//cout << word << endl;
+					row.push_back(word);
+					switch (temp)
+					{
+					case 1:
+
+						question = word;
+						break;
+					case 2:
+						option[0] = word;
+						break;
+					case 3:
+						//cout << word << endl;
+						option[1] = word;
+						break;
+					case 4:
+						option[2] = word;
+						break;
+					case 5:
+						option[3] = word;
+						break;
+					case 6:
+						correct_option = word[0];
+						break;
+					default:
+						break;
+
+					}
+					word = "";
+				}
+				else if (x != '\n')
+				{
+					word += x;
+				}
+			}
+			m.push_back(MCQ(question, option, correct_option));
+		}
+	}
 }

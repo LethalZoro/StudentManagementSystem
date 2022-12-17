@@ -55,5 +55,8 @@
     <None Include="Data.csv">
       <Filter>Source Files</Filter>
     </None>
+    <None Include="QuestionBank.csv">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

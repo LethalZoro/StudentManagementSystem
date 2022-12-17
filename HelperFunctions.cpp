@@ -9,6 +9,7 @@
 #include"Student.h"
 #include"Admin.h"
 #include"HelperFucntions.h"
+#include"MCQ.h"
 using namespace std;
 
 //Display function
@@ -119,7 +120,7 @@ void display(int x) {
 }
 
 //To login the login module per say &to direct the control to the desired position
-void login(Admin a, vector<Student>& s) {
+void login(Admin a, vector<Student>& s,vector<MCQ>& mcq) {
 label:
 	int op_start, op_student, op_admin=0;
 	int* net_score = new int;
@@ -150,7 +151,7 @@ label:
 					Edit_Studentinfo(s);
 					break;
 				case 3:
-
+					Add_MCQ(mcq);
 					break;
 				case 4:
 					return;//logout
@@ -476,21 +477,27 @@ void Output_File(vector<Student>& s, Admin& admin) {
 	file.close();
 }
 void Add_MCQ(vector<MCQ>& m) {
-	string question, option[4];
+	string q, option[4];
 	char correct_option;
 	cout << "Enter the question" << endl;
-	getline(cin, question);
+	getline(cin, q);
+	system("pause");
 	cout << "Enter the options 1" << endl;
 	getline(cin, option[0]);
+	system("pause");
 	cout << "Enter the options 2" << endl;
 	getline(cin, option[1]);
+	system("pause");
 	cout << "Enter the options 3" << endl;
 	getline(cin, option[2]);
+	system("pause");
 	cout << "Enter the options 4" << endl;
 	getline(cin, option[3]);
+	system("pause");
 	cout << "Enter the correct option" << endl;
 	cin >> correct_option;
-	m.push_back(MCQ(question, option, correct_option));
+	system("pause");
+	m.push_back(MCQ(q, option, correct_option));
 }
 void Read_MCQ(vector<MCQ>& m) {
 	//here write the code for the file opening and reading
@@ -555,4 +562,13 @@ void Read_MCQ(vector<MCQ>& m) {
 			m.push_back(MCQ(question, option, correct_option));
 		}
 	}
+}
+void Save_MCQ(vector<MCQ>& mcq) {
+	ofstream file;
+	file.open("QuestionBank.csv");
+	file << "Question,Option1,Option2,Option3,Option4,Correct_Option" << endl;
+	for (int i = 0; i < mcq.size(); i++) {
+		file << mcq[i].get_questions() << "," << mcq[i].get_options()[0] << "," << mcq[i].get_options()[1] << "," << mcq[i].get_options()[2] << "," << mcq[i].get_options()[3] << "," << mcq[i].get_answers()<<"," << endl;
+	}
+	file.close();
 }

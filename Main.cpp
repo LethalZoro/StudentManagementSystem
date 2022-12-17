@@ -15,16 +15,18 @@ int main() {
 	Admin   admin;
 	vector<MCQ> mcq;
 	
-	/*Input_File(students,admin);
-	login(admin, students);*/
+	Input_File(students,admin);
+	//login(admin, students,mcq);
 	Read_MCQ(mcq);
-	cout<<mcq[0].get_questions()<<endl;
+	/*cout<<mcq[0].get_questions()<<endl;
 	cout << mcq[0].get_options()[0]<<endl;
 	cout << mcq[0].get_options()[1] <<endl;
 	cout << mcq[0].get_options()[2]<<endl;
 	cout << mcq[0].get_options()[3]<<endl;
-	cout << mcq[0].get_answers()<<endl;
+	cout << mcq[0].get_answers()<<endl;*/
 	//this should be the last line of the main function
-	//Output_File(students, admin);
+	Add_MCQ(mcq);
+	Output_File(students, admin);
+	Save_MCQ(mcq);
 	return 0;
 }

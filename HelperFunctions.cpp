@@ -288,6 +288,7 @@ void Generate_merit(vector<Student>& s) {
 		cout << s[i].get_firstname() <<" " << s[i].get_lastname() << s[i].get_netmarks() << endl;
 	}*/
 	cout << "Merit list generated successfully\n";
+	system("pause");
 };
 void Take_test(vector<Student>& s) {
 	//here write the code for the student menu and every thing related to it
@@ -473,4 +474,22 @@ void Output_File(vector<Student>& s, Admin& admin) {
 		file << s[i].get_username() << "," << s[i].get_password() << "," << s[i].get_firstname() << "," << s[i].get_lastname() << "," << s[i].get_fname() << "," << s[i].get_age() << "," << s[i].get_cnic() << "," << s[i].get_fscm() << "," << s[i].get_netmarks() <<"," << endl;
 	}
 	file.close();
+}
+void Add_MCQ(vector<MCQ>& m) {
+	string question, option[4];
+	char correct_option;
+	cout << "Enter the question" << endl;
+	getline(cin, question);
+	cout << "Enter the options 1" << endl;
+	getline(cin, option[0]);
+	cout << "Enter the options 2" << endl;
+	getline(cin, option[1]);
+	cout << "Enter the options 3" << endl;
+	getline(cin, option[2]);
+	cout << "Enter the options 4" << endl;
+	getline(cin, option[3]);
+	cout << "Enter the correct option" << endl;
+	cin >> correct_option;
+	
+	m.push_back(MCQ(question, option, correct_option));
 }

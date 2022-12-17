@@ -8,15 +8,15 @@ class MCQ {
 private:
 	string questions;
 	string options[4];
-	int answers;
+	char answers;
 public:
 	MCQ();
-	MCQ(string q, string* o, int a);
+	MCQ(string q, string* o, char a);
 	void set_questions(string q);
 	void set_options(string* o);
-	void set_answers(int a);
+	void set_answers(char a);
 	string get_questions();
 	string* get_options();
-	int get_answers();
+	char get_answers();
 	
 };

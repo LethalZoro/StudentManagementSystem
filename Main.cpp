@@ -17,6 +17,7 @@ int main() {
 	//Student s("abc", "xyz");
 	login(admin, students);
 	
+	
 	//this should be the last line of the main function
 	Output_File(students, admin);
 	return 0;

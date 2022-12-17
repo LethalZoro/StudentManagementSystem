@@ -8,7 +8,7 @@ using namespace std;
 		
 		answers = 0;
 	}
-	MCQ::MCQ(string q, string* o, int a) {
+	MCQ::MCQ(string q, string* o, char a) {
 		questions = q;
 		copy(o, o + 4, options);
 		answers = a;
@@ -19,7 +19,7 @@ using namespace std;
 	void MCQ::set_options(string* o) {
 		copy(o, o + 4, options);
 	}
-	void MCQ::set_answers(int a) {
+	void MCQ::set_answers(char a) {
 		answers = a;
 	}
 	string MCQ::get_questions() {
@@ -28,6 +28,6 @@ using namespace std;
 	string* MCQ::get_options() {
 		return options;
 	}
-	int MCQ::get_answers() {
+	char MCQ::get_answers() {
 		return answers;
 	}

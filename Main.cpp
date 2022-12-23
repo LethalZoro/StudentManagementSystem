@@ -9,6 +9,7 @@
 #include"MCQ.h"
 #include"HelperFucntions.h"
 using namespace std;
+#define Questions_toGive 9
 
 int main() {
 	vector<Student> students;

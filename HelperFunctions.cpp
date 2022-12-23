@@ -10,7 +10,7 @@
 #include"Admin.h"
 #include"HelperFucntions.h"
 #include"MCQ.h"
-#define Questions_toGive 5
+#define Questions_toGive 9
 using namespace std;
 
 //Display function
@@ -119,10 +119,11 @@ void display(int x) {
 //To login the login module per say &to direct the control to the desired position
 void login(Admin a, vector<Student>& s, vector<MCQ>& mcq) {
 label:
-	int op_start, op_student, op_admin = 0;
+	int op_start, op_student, op_admin = 0,questions=Questions_toGive;
 	int* net_score = new int;
 	bool is_correct = false;
 	string us, p;
+	float x;
 	display(0);
 	cout << "Enter you option: ";
 	cin >> op_start;
@@ -150,11 +151,14 @@ label:
 					cout << "To go back press 2: " << endl;
 					cin >> a;
 					if (a == 1)
-					{
-						cout << setw(20) <<left<< "Fisrt Name" <<right<< setw(20) <<left<< "Last Name" <<right<< setw(10) <<left<< "Net Marks" <<right<< endl;
+					{	
+
+						cout << " ###################################################" << endl;
+						cout <<"| " << setw(20) << left << "Fisrt Name" << right << setw(20) << left << "Last Name" << right << setw(10) << left << "Net Marks" << right <<"|" << endl;
 						for (int i = 0; i < s.size(); i++) {
-						cout << setw(20) <<left<< s[i].get_firstname() <<right<< setw(20) <<left<< s[i].get_lastname() <<right<< setw(10) <<left<< s[i].get_netmarks() <<right<< endl;
+						cout << "| " << setw(20) << left << s[i].get_firstname() << right << setw(20) << left << s[i].get_lastname() << right << setw(10) << left << s[i].get_netmarks() << right <<"|" << endl;
 						}
+						cout << " ###################################################" << endl;
 						system("pause");
 					}
 					break;
@@ -215,15 +219,25 @@ label:
 					{
 					case 1:
 						//show result
-						cout << "Your net score is: " << s[i].get_netmarks() << endl;
+						system("cls");
+						 x = (s[i].get_netmarks() * 100)/ questions ;
+						 cout << " ##################################" << endl;
+						 cout << "|" << setw(35) << "|" << endl;
+						cout << "| Your net score is: " << setw(2) << s[i].get_netmarks() << "/" << setw(2) << left << questions << right << setw(10) << "|" << endl;
+						cout << "|" << setw(35) << "|" << endl;
+						
+						cout << "| Your result percentage is: " << setw(2) << x << "%" << setw(4) << "|" << endl;
+						cout << "|" << setw(35) << "|" << endl;
 						Generate_merit(s);
 						for (int i = 0; i < s.size(); i++)
 						{
 							if (s[i].get_username().compare(us) == 0 && s[i].get_password().compare(p) == 0)
 							{
-								cout << "Your Merit Position is: " << i + 1 << endl;
+								cout << "| Your Merit Position is: " << setw(3) << i + 1 << setw(7) << "|" << endl;
 							}
 						}
+						cout << "|" << setw(35) << "|" << endl;
+						cout << " ##################################" << endl;
 						system("pause");
 						goto start;
 						break;
@@ -258,10 +272,12 @@ label:
 }
 void Show_Student(vector<Student>& s) {
 	system("cls");
-	cout << setw(15) << left << "First Name" << right << setw(15) << left << "Last Name" << right << setw(15) << left << "Father's Name" << right << setw(15) << left << "Age" << right << setw(20) << left << "CNIC" << right << endl;
+	cout << " #################################################################################" << endl;
+	cout << "| " << setw(15) << left << "First Name" << right << setw(15) << left << "Last Name" << right << setw(20) << left << "Father's Name" << right << setw(10) << left << "Age" << right << setw(20) << left << "CNIC" << right << "|" << endl;
 	for (int i = 0; i < s.size(); i++) {
-		cout << setw(15) << left << s[i].get_firstname() << right << setw(15) << left << s[i].get_lastname() << right << setw(15) << left << s[i].get_fname() << right << setw(15) << left << s[i].get_age() << right << setw(20) << left << s[i].get_cnic() << right << endl;
+		cout << "| "<<setw(15) << left << s[i].get_firstname() << right << setw(15) << left << s[i].get_lastname() << right << setw(20) << left << s[i].get_fname() << right << setw(10) << left << s[i].get_age() << right << setw(20) << left << s[i].get_cnic() << right << "|" << endl;
 	}
+	cout << " #################################################################################" << endl;
 }
 void Edit_Studentinfo(vector<Student>& s) {
 	Show_Student(s);
@@ -375,8 +391,31 @@ int Take_test(vector<Student>& s, vector<MCQ>& mcq) {
 		return 0;
 	}
 	int op_student;
-	int* Q_done = new int[Questions_toGive];
+	int Q_done[Questions_toGive];
+	for (int i = 0; i < Questions_toGive; i++) {
+		Q_done[i] = -1;
+	}
+	srand(time(NULL));
 	int count = 0;
+
+
+	for (int i = 0; i < Questions_toGive; i++) {
+		int random = rand() % mcq.size();
+		//check if the random number is already generated or not
+		for (int j = 0; j < Questions_toGive; j++) {
+			if (Q_done[j] == random) {
+				random = rand() % mcq.size();
+				j = -1;
+			}
+		}
+		
+		Q_done[i] = random;
+	}
+	
+
+
+	system("pause");
+
 	display(7);
 	cin >> op_student;
 	system("cls");
@@ -388,25 +427,13 @@ int Take_test(vector<Student>& s, vector<MCQ>& mcq) {
 		//generate random number between 1 to 10
 		for (int i = 0; i < Questions_toGive; i++) {
 
-
-			srand(time(NULL));
-			int random = rand() % mcq.size() ;
-			//check if the random number is already generated or not
-			for (int j = 0; j < mcq.size(); j++) {
-				if (Q_done[j] == random) {
-					random = rand() % mcq.size() ;
-					j = 0;
-				}
-			}
-			Q_done[i] = random;
-			cout << setw(15) << mcq[random].get_questions() << endl;
-			cout << "a. " << setw(15) << left << mcq[random].get_options()[0] << right << "b. " << setw(15) << left << mcq[random].get_options()[1] << right << endl;
-			//cout <<"c. "<<setw(15) <<left << mcq[random].get_options()[2]<<right<< "d. " <<setw(15) <<left<< mcq[random].get_options()[3]<<right << endl;
-			cout << "c. " << setw(15) << left << mcq[random].get_options()[2] << right << "d. " << setw(15) << left << mcq[random].get_options()[3] << right << endl;
+			cout << setw(15) << mcq[Q_done[i]].get_questions() << endl;
+			cout << "a. " << setw(15) << left << mcq[Q_done[i]].get_options()[0] << right << "b. " << setw(15) << left << mcq[Q_done[i]].get_options()[1] << right << endl;
+			cout << "c. " << setw(15) << left << mcq[Q_done[i]].get_options()[2] << right << "d. " << setw(15) << left << mcq[Q_done[i]].get_options()[3] << right << endl;
 			cout << setw(15) << "Enter the correct option: ";
 			char op;
 			cin >> op;
-			if (mcq[random].get_answers() == op) {
+			if (mcq[Q_done[i]].get_answers() == op) {
 				cout << "Correct answer\n";
 				count++;
 			}
@@ -425,6 +452,69 @@ int Take_test(vector<Student>& s, vector<MCQ>& mcq) {
 	}
 	return count;
 }
+//int Take_test(vector<Student>& s, vector<MCQ>& mcq) {
+//	//here write the code for the student menu and every thing related to it
+//	if (mcq.size() == 0) {
+//		cout << "No question are available!!\n";
+//		return 0;
+//	}
+//	int op_student;
+//	int Q_done[Questions_toGive];
+//	for (int i = 0; i < Questions_toGive; i++) {
+//		Q_done[i] = -1;
+//	}
+//	srand(time(NULL));
+//	int count = 0;
+//	display(7);
+//	cin >> op_student;
+//	system("cls");
+//	switch (op_student)
+//	{
+//	case 1:
+//		//Place for Test function
+//		//cout << "test starts";
+//		//generate random number between 1 to 10
+//		for (int i = 0; i < Questions_toGive; i++) {
+//			int random = rand() % mcq.size() ;
+//			//check if the random number is already generated or not
+//			for (int j = 0; j < Questions_toGive; j++) {
+//				if (Q_done[j] == random) {
+//					random = rand() % mcq.size() ;
+//					j = 0;
+//				}
+//			}
+//			for (int x = 0; x < Questions_toGive; x++) {
+//				if (Q_done[x] == random) {
+//					system("pause");
+//				}
+//			}
+//			Q_done[i] = random;
+//			cout << setw(15) << mcq[random].get_questions() << endl;
+//			cout << "a. " << setw(15) << left << mcq[random].get_options()[0] << right << "b. " << setw(15) << left << mcq[random].get_options()[1] << right << endl;
+//			//cout <<"c. "<<setw(15) <<left << mcq[random].get_options()[2]<<right<< "d. " <<setw(15) <<left<< mcq[random].get_options()[3]<<right << endl;
+//			cout << "c. " << setw(15) << left << mcq[random].get_options()[2] << right << "d. " << setw(15) << left << mcq[random].get_options()[3] << right << endl;
+//			cout << setw(15) << "Enter the correct option: ";
+//			char op;
+//			cin >> op;
+//			if (mcq[random].get_answers() == op) {
+//				cout << "Correct answer\n";
+//				count++;
+//			}
+//			else {
+//				cout << "Wrong answer\n";
+//			}
+//			system("pause");
+//			system("cls");
+//		}
+//		break;
+//	case 2:
+//		return 0;
+//		break;
+//	default:
+//		break;
+// }
+//	return count;
+//}
 
 
 
@@ -435,12 +525,12 @@ void StudentReg(vector<Student>& s) {
 	int age;
 	string cnic;
 	int fsc_marks;
-	cout << "Enter students's First name : ";
-	cin >> first_name;
-	cout << "Enter students's Last name : ";
-	cin >> last_name;
-	cout << "Enter your father's name : ";
 	cin.ignore();
+	cout << "Enter students's First name : ";
+	getline(cin, first_name);
+	cout << "Enter students's Last name : ";
+	getline(cin, last_name);
+	cout << "Enter your father's name : ";
 	getline(cin, father_name);
 	cout << "Enter your age : ";
 age_er:
@@ -500,7 +590,7 @@ void Input_File(vector<Student>& s, Admin& admin) {
 	string cnic;
 	string line, word, a_user, a_pass;
 	int linesRead = -1, temp = 0;
-	while (file >> line)
+	while (getline(file,line))
 	{
 		linesRead++;
 		if (linesRead == 0)
@@ -515,11 +605,9 @@ void Input_File(vector<Student>& s, Admin& admin) {
 					{
 					case 0:
 						a_user = word;
-						cout << a_user << endl;
 						break;
 					case 1:
 						a_pass = word;
-						cout << a_pass << endl;
 
 						break;
 					default:
@@ -542,7 +630,7 @@ void Input_File(vector<Student>& s, Admin& admin) {
 		else {
 			for (auto x : line)
 			{
-				if (x == ',' || x == '\n' || x == ' ')
+				if (x == ',' || x == '\n' )
 				{
 					if (temp == 9) {
 						temp = 0;

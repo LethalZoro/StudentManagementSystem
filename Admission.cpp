@@ -18,9 +18,3 @@ void Admission::set_username(string un) {
 void Admission::set_password(string pa) {
 	password = pa;
 }
-int* Admission::get_merit() {
-	return merit_list;
-};
-void Admission::set_merit(int* ml) {
-	merit_list = ml;
-};

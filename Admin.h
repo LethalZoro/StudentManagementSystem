@@ -3,15 +3,9 @@
 #include"Admission.h"
 #include"MCQ.h"
 using namespace std;
-class Admin :public Admission {
-private:
-	MCQ* a = new MCQ;
-
+class Admin :public Admission {	
 public:
-	Admin() {
-
-	}
-	Admin(string us, string p) :Admission(us, p) {
-
-	}
+	Admin();
+	Admin(string us, string p);
+	void Change_Credentials();
 };

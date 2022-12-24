@@ -2,7 +2,6 @@
 #include<algorithm>
 #include "MCQ.h"
 using namespace std;
-
 	MCQ::MCQ() {
 		questions = "";
 		

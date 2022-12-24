@@ -18,5 +18,4 @@ public:
 	string get_questions();
 	string* get_options();
 	char get_answers();
-	
 };

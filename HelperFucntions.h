@@ -4,8 +4,9 @@
 using namespace std;
 class Admin;
 class Student;
-void display(int x);
-void login(Admin a, vector<Student>& s, vector<MCQ>& mcq);
+template<typename T>
+void display(T x);
+void login(Admin& a, vector<Student>& s, vector<MCQ>& mcq);
 void NewStudent(vector<Student>& s);
 void StudentReg(vector<Student>& s);
 int Take_test(vector<Student>& s,vector<MCQ>&mcq );

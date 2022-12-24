@@ -14,20 +14,20 @@ private:
 public:
 	static int roll_num;
 	Student();
-	Student(string us, string p, string n,string , string fn, int ag, string cnic, int fsc,int net);
-	void set_age(int a);
+	Student(string username, string password, string First_name, string Second_Name, string Father_name, int age, string cnic, int fsc, int net);
+	void Change_Credentials();
+	void set_firstname(string fn);
+	void set_lastname(string ln);
 	void set_fname(string fn);
-	void set_cnic(string cinc);
+	void set_age(int a);
+	void set_cnic(string cnic);
 	void set_fscm(int fm);
 	void set_netmarks(int nm);
-	int get_age();
+	string get_firstname();
+	string get_lastname();
 	string get_fname();
+	int get_age();
 	string get_cnic();
 	int get_fscm();
 	int get_netmarks();
-	void set_firstname(string fn);
-	void set_lastname(string ln);
-	string get_firstname();
-	string get_lastname();
-
 };
